@@ -1,375 +1,327 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vocabulary Quiz: able, abroad, absent, accept, accident</title>
+    <title>英语单词选择题测验</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
-            line-height: 1.6;
-            max-width: 800px;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            max-width: 600px;
             margin: 0 auto;
-            padding: 20px;
+            padding: 30px;
+            background-color: #f5f7fa;
+            color: #333;
+            text-align: center;
         }
         h1 {
             color: #2c3e50;
-            text-align: center;
+            margin-bottom: 30px;
+            font-weight: 600;
+        }
+        .quiz-container {
+            background-color: white;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
         }
         .question {
-            margin-bottom: 20px;
-            padding: 15px;
-            background-color: #f9f9f9;
-            border-radius: 5px;
+            font-size: 22px;
+            margin-bottom: 25px;
+            font-weight: 500;
+            color: #2c3e50;
+            min-height: 60px;
         }
         .options {
-            margin-left: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-bottom: 25px;
         }
-        button {
-            display: block;
-            margin: 20px auto;
-            padding: 10px 20px;
+        .option {
+            padding: 15px;
+            border-radius: 8px;
+            background-color: #f8f9fa;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            border: 2px solid transparent;
+        }
+        .option:hover {
+            background-color: #e9ecef;
+        }
+        .option.selected {
+            border-color: #3498db;
+            background-color: #e3f2fd;
+        }
+        .option.correct {
+            background-color: #d4edda;
+            border-color: #28a745;
+        }
+        .option.incorrect {
+            background-color: #f8d7da;
+            border-color: #dc3545;
+        }
+        .feedback {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 8px;
+            font-size: 18px;
+            display: none;
+        }
+        .correct-feedback {
+            background-color: #d4edda;
+            color: #155724;
+        }
+        .next-btn {
+            width: 100%;
+            padding: 12px;
             background-color: #3498db;
             color: white;
             border: none;
-            border-radius: 5px;
+            border-radius: 8px;
+            font-size: 16px;
             cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 20px;
         }
-        button:hover {
+        .next-btn:hover {
             background-color: #2980b9;
         }
-        #results {
-            text-align: center;
-            font-weight: bold;
-            margin-top: 20px;
-            padding: 10px;
-            border-radius: 5px;
+        .progress {
+            margin-bottom: 20px;
+            font-size: 16px;
+            color: #7f8c8d;
         }
-        .answer-key {
+        .result {
+            font-size: 20px;
             margin-top: 30px;
-            border-top: 1px solid #ddd;
-            padding-top: 20px;
+            font-weight: 500;
+            display: none;
         }
-        .correct {
-            color: green;
-            font-weight: bold;
-        }
-        .incorrect {
-            color: red;
-        }
-        .explanation {
-            font-style: italic;
-            color: #555;
-            margin-top: 5px;
+        .highlight {
+            font-weight: 600;
+            color: #2c3e50;
         }
     </style>
 </head>
 <body>
-    <h1>Vocabulary Quiz</h1>
-    <p>Choose the correct answer for each question. All questions are about these words: able, abroad, absent, accept, accident.</p>
+    <h1>英语单词选择题测验</h1>
+    <div class="progress">问题 <span id="current-question">1</span>/19</div>
     
-    <div id="quiz">
-        <div class="question" id="q1-container">
-            <p>1. My cousin is studying ____ in Australia this year.</p>
-            <div class="options">
-                <label><input type="radio" name="q1" value="a"> able</label><br>
-                <label><input type="radio" name="q1" value="b"> abroad</label><br>
-                <label><input type="radio" name="q1" value="c"> absent</label><br>
-                <label><input type="radio" name="q1" value="d"> accident</label>
-            </div>
-        </div>
-        
-        <div class="question" id="q2-container">
-            <p>2. Sarah was ____ from school yesterday because she was sick.</p>
-            <div class="options">
-                <label><input type="radio" name="q2" value="a"> able</label><br>
-                <label><input type="radio" name="q2" value="b"> abroad</label><br>
-                <label><input type="radio" name="q2" value="c"> absent</label><br>
-                <label><input type="radio" name="q2" value="d"> accept</label>
-            </div>
-        </div>
-        
-        <div class="question" id="q3-container">
-            <p>3. After practicing for months, I was finally ____ to ride a bike.</p>
-            <div class="options">
-                <label><input type="radio" name="q3" value="a"> able</label><br>
-                <label><input type="radio" name="q3" value="b"> abroad</label><br>
-                <label><input type="radio" name="q3" value="c"> absent</label><br>
-                <label><input type="radio" name="q3" value="d"> accident</label>
-            </div>
-        </div>
-        
-        <div class="question" id="q4-container">
-            <p>4. There was a car ____ on the highway this morning.</p>
-            <div class="options">
-                <label><input type="radio" name="q4" value="a"> able</label><br>
-                <label><input type="radio" name="q4" value="b"> abroad</label><br>
-                <label><input type="radio" name="q4" value="c"> accept</label><br>
-                <label><input type="radio" name="q4" value="d"> accident</label>
-            </div>
-        </div>
-        
-        <div class="question" id="q5-container">
-            <p>5. Will you ____ my invitation to the party?</p>
-            <div class="options">
-                <label><input type="radio" name="q5" value="a"> able</label><br>
-                <label><input type="radio" name="q5" value="b"> accept</label><br>
-                <label><input type="radio" name="q5" value="c"> absent</label><br>
-                <label><input type="radio" name="q5" value="d"> abroad</label>
-            </div>
-        </div>
-        
-        <div class="question" id="q6-container">
-            <p>6. My uncle has lived ____ for ten years in different countries.</p>
-            <div class="options">
-                <label><input type="radio" name="q6" value="a"> able</label><br>
-                <label><input type="radio" name="q6" value="b"> abroad</label><br>
-                <label><input type="radio" name="q6" value="c"> absent</label><br>
-                <label><input type="radio" name="q6" value="d"> accident</label>
-            </div>
-        </div>
-        
-        <div class="question" id="q7-container">
-            <p>7. The teacher marked me ____ when I forgot to come to class.</p>
-            <div class="options">
-                <label><input type="radio" name="q7" value="a"> able</label><br>
-                <label><input type="radio" name="q7" value="b"> abroad</label><br>
-                <label><input type="radio" name="q7" value="c"> absent</label><br>
-                <label><input type="radio" name="q7" value="d"> accept</label>
-            </div>
-        </div>
-        
-        <div class="question" id="q8-container">
-            <p>8. I hope I'll be ____ to finish my homework before dinner.</p>
-            <div class="options">
-                <label><input type="radio" name="q8" value="a"> able</label><br>
-                <label><input type="radio" name="q8" value="b"> abroad</label><br>
-                <label><input type="radio" name="q8" value="c"> absent</label><br>
-                <label><input type="radio" name="q8" value="d"> accept</label>
-            </div>
-        </div>
-        
-        <div class="question" id="q9-container">
-            <p>9. The museum doesn't ____ visitors after 5:00 pm.</p>
-            <div class="options">
-                <label><input type="radio" name="q9" value="a"> able</label><br>
-                <label><input type="radio" name="q9" value="b"> abroad</label><br>
-                <label><input type="radio" name="q9" value="c"> accept</label><br>
-                <label><input type="radio" name="q9" value="d"> accident</label>
-            </div>
-        </div>
-        
-        <div class="question" id="q10-container">
-            <p>10. She broke her arm in a skiing ____ last winter.</p>
-            <div class="options">
-                <label><input type="radio" name="q10" value="a"> able</label><br>
-                <label><input type="radio" name="q10" value="b"> abroad</label><br>
-                <label><input type="radio" name="q10" value="c"> absent</label><br>
-                <label><input type="radio" name="q10" value="d"> accident</label>
-            </div>
-        </div>
-        
-        <div class="question" id="q11-container">
-            <p>11. Are you ____ to swim across the pool?</p>
-            <div class="options">
-                <label><input type="radio" name="q11" value="a"> able</label><br>
-                <label><input type="radio" name="q11" value="b"> abroad</label><br>
-                <label><input type="radio" name="q11" value="c"> absent</label><br>
-                <label><input type="radio" name="q11" value="d"> accept</label>
-            </div>
-        </div>
-        
-        <div class="question" id="q12-container">
-            <p>12. Many students dream of studying ____ after high school.</p>
-            <div class="options">
-                <label><input type="radio" name="q12" value="a"> able</label><br>
-                <label><input type="radio" name="q12" value="b"> abroad</label><br>
-                <label><input type="radio" name="q12" value="c"> absent</label><br>
-                <label><input type="radio" name="q12" value="d"> accident</label>
-            </div>
-        </div>
-        
-        <div class="question" id="q13-container">
-            <p>13. Three students were ____ from class during the fire drill.</p>
-            <div class="options">
-                <label><input type="radio" name="q13" value="a"> able</label><br>
-                <label><input type="radio" name="q13" value="b"> abroad</label><br>
-                <label><input type="radio" name="q13" value="c"> absent</label><br>
-                <label><input type="radio" name="q13" value="d"> accept</label>
-            </div>
-        </div>
-        
-        <div class="question" id="q14-container">
-            <p>14. The store doesn't ____ returns without a receipt.</p>
-            <div class="options">
-                <label><input type="radio" name="q14" value="a"> able</label><br>
-                <label><input type="radio" name="q14" value="b"> abroad</label><br>
-                <label><input type="radio" name="q14" value="c"> accept</label><br>
-                <label><input type="radio" name="q14" value="d"> accident</label>
-            </div>
-        </div>
-        
-        <div class="question" id="q15-container">
-            <p>15. It was just an ____ that I broke your cup - I didn't mean to.</p>
-            <div class="options">
-                <label><input type="radio" name="q15" value="a"> able</label><br>
-                <label><input type="radio" name="q15" value="b"> abroad</label><br>
-                <label><input type="radio" name="q15" value="c"> absent</label><br>
-                <label><input type="radio" name="q15" value="d"> accident</label>
-            </div>
-        </div>
-        
-        <div class="question" id="q16-container">
-            <p>16. With glasses, I'm ____ to see the board clearly.</p>
-            <div class="options">
-                <label><input type="radio" name="q16" value="a"> able</label><br>
-                <label><input type="radio" name="q16" value="b"> abroad</label><br>
-                <label><input type="radio" name="q16" value="c"> absent</label><br>
-                <label><input type="radio" name="q16" value="d"> accept</label>
-            </div>
-        </div>
-        
-        <div class="question" id="q17-container">
-            <p>17. My parents sent me a postcard when they were traveling ____.</p>
-            <div class="options">
-                <label><input type="radio" name="q17" value="a"> able</label><br>
-                <label><input type="radio" name="q17" value="b"> abroad</label><br>
-                <label><input type="radio" name="q17" value="c"> absent</label><br>
-                <label><input type="radio" name="q17" value="d"> accident</label>
-            </div>
-        </div>
-        
-        <div class="question" id="q18-container">
-            <p>18. The teacher noticed that several books were ____ from the shelf.</p>
-            <div class="options">
-                <label><input type="radio" name="q18" value="a"> able</label><br>
-                <label><input type="radio" name="q18" value="b"> abroad</label><br>
-                <label><input type="radio" name="q18" value="c"> absent</label><br>
-                <label><input type="radio" name="q18" value="d"> accept</label>
-            </div>
-        </div>
-        
-        <div class="question" id="q19-container">
-            <p>19. Please ____ my apology for being late.</p>
-            <div class="options">
-                <label><input type="radio" name="q19" value="a"> able</label><br>
-                <label><input type="radio" name="q19" value="b"> abroad</label><br>
-                <label><input type="radio" name="q19" value="c"> accept</label><br>
-                <label><input type="radio" name="q19" value="d"> accident</label>
-            </div>
-        </div>
-        
-        <div class="question" id="q20-container">
-            <p>20. The little boy had an ____ and spilled juice on the carpet.</p>
-            <div class="options">
-                <label><input type="radio" name="q20" value="a"> able</label><br>
-                <label><input type="radio" name="q20" value="b"> abroad</label><br>
-                <label><input type="radio" name="q20" value="c"> absent</label><br>
-                <label><input type="radio" name="q20" value="d"> accident</label>
-            </div>
-        </div>
+    <div class="quiz-container">
+        <div class="question" id="question-text"></div>
+        <div class="options" id="options-container"></div>
+        <div class="feedback" id="feedback"></div>
+        <button class="next-btn" id="next-btn" disabled>下一题</button>
     </div>
     
-    <button onclick="checkAnswers()">Submit Answers</button>
-    
-    <div id="results"></div>
-    
-    <div id="answer-key" class="answer-key" style="display: none;">
-        <h2>Answer Key</h2>
-        <div id="key-content"></div>
-    </div>
+    <div class="result" id="result"></div>
     
     <script>
-        const explanations = {
-            q1: "The correct answer is 'abroad' because it means in or to a foreign country.",
-            q2: "The correct answer is 'absent' because it means not present at a usual place.",
-            q3: "The correct answer is 'able' because it means having the power, skill, or means to do something.",
-            q4: "The correct answer is 'accident' because it refers to an unfortunate incident that happens unexpectedly.",
-            q5: "The correct answer is 'accept' because it means to consent to receive or undertake something offered.",
-            q6: "The correct answer is 'abroad' because it refers to living in foreign countries.",
-            q7: "The correct answer is 'absent' because it describes someone not attending when they should.",
-            q8: "The correct answer is 'able' because it refers to having the capacity to do something.",
-            q9: "The correct answer is 'accept' because it means to allow people to enter (in this context).",
-            q10: "The correct answer is 'accident' because it refers to an unplanned event causing injury.",
-            q11: "The correct answer is 'able' because it asks about someone's capability.",
-            q12: "The correct answer is 'abroad' because it refers to studying in foreign countries.",
-            q13: "The correct answer is 'absent' because it describes students not present in class.",
-            q14: "The correct answer is 'accept' because it refers to taking something back (returns).",
-            q15: "The correct answer is 'accident' because it refers to something happening unintentionally.",
-            q16: "The correct answer is 'able' because it describes the capacity to see with glasses.",
-            q17: "The correct answer is 'abroad' because it refers to traveling in foreign countries.",
-            q18: "The correct answer is 'absent' because it means not present (missing from the shelf).",
-            q19: "The correct answer is 'accept' because it means to receive an apology willingly.",
-            q20: "The correct answer is 'accident' because it refers to an unplanned spill."
-        };
+        const questions = [
+            {
+                question: "挥动,摆动(某物);(某物)上下起伏，左右摇晃",
+                options: ["voice", "wave", "fall", "wig"],
+                answer: 1
+            },
+            {
+                question: "说话声，嗓音:发声能力",
+                options: ["voice", "shoulder", "scissors", "office"],
+                answer: 0
+            },
+            {
+                question: "只不过，只是",
+                options: ["just", "finally", "smart", "into"],
+                answer: 0
+            },
+            {
+                question: "他自己",
+                options: ["himself", "customer", "barber", "surprised"],
+                answer: 0
+            },
+            {
+                question: "羞愧，羞耻，惭愧",
+                options: ["shame", "smile", "receive", "cancer"],
+                answer: 0
+            },
+            {
+                question: "最后，终于",
+                options: ["into", "finally", "just", "smart"],
+                answer: 1
+            },
+            {
+                question: "进入，到..里面",
+                options: ["into", "fall", "receive", "wig"],
+                answer: 0
+            },
+            {
+                question: "(为男性剪发或刮脸的) 男理发师",
+                options: ["customer", "barber", "shoulder", "scissors"],
+                answer: 1
+            },
+            {
+                question: "落下，降落，跌落",
+                options: ["fall", "wave", "receive", "smile"],
+                answer: 0
+            },
+            {
+                question: "肩膀",
+                options: ["shoulder", "scissors", "wig", "cancer"],
+                answer: 0
+            },
+            {
+                question: "顾客，客户",
+                options: ["barber", "customer", "office", "surprised"],
+                answer: 1
+            },
+            {
+                question: "吃惊的，惊奇的，惊讶的，诧异的",
+                options: ["smart", "surprised", "shame", "himself"],
+                answer: 1
+            },
+            {
+                question: "剪刀；剪子",
+                options: ["scissors", "wig", "shoulder", "office"],
+                answer: 0
+            },
+            {
+                question: "办公楼，办事处，公司",
+                options: ["office", "barber", "cancer", "voice"],
+                answer: 0
+            },
+            {
+                question: "得到，收到",
+                options: ["receive", "wave", "smile", "fall"],
+                answer: 0
+            },
+            {
+                question: "癌 (症)",
+                options: ["wig", "cancer", "shame", "scissors"],
+                answer: 1
+            },
+            {
+                question: "假发",
+                options: ["wig", "shoulder", "scissors", "barber"],
+                answer: 0
+            },
+            {
+                question: "聪颖的，机灵的；明智的",
+                options: ["smart", "surprised", "just", "finally"],
+                answer: 0
+            },
+            {
+                question: "微笑",
+                options: ["smile", "wave", "fall", "receive"],
+                answer: 0
+            }
+        ];
 
-        function checkAnswers() {
-            const correctAnswers = {
-                q1: "b", q2: "c", q3: "a", q4: "d", q5: "b",
-                q6: "b", q7: "c", q8: "a", q9: "c", q10: "d",
-                q11: "a", q12: "b", q13: "c", q14: "c", q15: "d",
-                q16: "a", q17: "b", q18: "c", q19: "c", q20: "d"
-            };
+        let currentQuestion = 0;
+        let score = 0;
+        let userAnswers = Array(questions.length).fill(null);
+
+        const questionText = document.getElementById('question-text');
+        const optionsContainer = document.getElementById('options-container');
+        const feedback = document.getElementById('feedback');
+        const nextBtn = document.getElementById('next-btn');
+        const currentQuestionSpan = document.getElementById('current-question');
+        const result = document.getElementById('result');
+
+        function displayQuestion() {
+            currentQuestionSpan.textContent = currentQuestion + 1;
+            questionText.textContent = questions[currentQuestion].question;
+            optionsContainer.innerHTML = '';
             
-            let score = 0;
-            let keyContent = "";
-            
-            for (let i = 1; i <= 20; i++) {
-                const questionName = "q" + i;
-                const selectedOption = document.querySelector(`input[name="${questionName}"]:checked`);
-                const questionContainer = document.getElementById(`${questionName}-container`);
-                
-                if (selectedOption) {
-                    if (selectedOption.value === correctAnswers[questionName]) {
-                        score++;
-                        questionContainer.style.backgroundColor = "#e6ffe6";
-                    } else {
-                        questionContainer.style.backgroundColor = "#ffe6e6";
-                    }
-                } else {
-                    questionContainer.style.backgroundColor = "#fff9e6";
+            questions[currentQuestion].options.forEach((option, index) => {
+                const optionElement = document.createElement('div');
+                optionElement.className = 'option';
+                if (userAnswers[currentQuestion] === index) {
+                    optionElement.classList.add('selected');
                 }
-                
-                // Build answer key content
-                const correctLetter = correctAnswers[questionName];
-                const correctText = document.querySelector(`input[name="${questionName}"][value="${correctLetter}"]`).parentElement.textContent.trim();
-                
-                keyContent += `<p><strong>Question ${i}:</strong>`;
-                if (selectedOption) {
-                    if (selectedOption.value === correctAnswers[questionName]) {
-                        keyContent += ` <span class="correct">Correct!</span>`;
-                    } else {
-                        const selectedText = selectedOption.parentElement.textContent.trim();
-                        keyContent += ` <span class="incorrect">You chose: ${selectedText}</span>`;
-                    }
-                } else {
-                    keyContent += ` <span class="incorrect">(Not answered)</span>`;
-                }
-                keyContent += ` The correct answer is <strong>${correctText}</strong>.</p>`;
-                keyContent += `<p class="explanation">${explanations[questionName]}</p>`;
-            }
+                optionElement.textContent = `${String.fromCharCode(65 + index)}. ${option}`;
+                optionElement.dataset.index = index;
+                optionElement.addEventListener('click', selectOption);
+                optionsContainer.appendChild(optionElement);
+            });
             
-            const resultsDiv = document.getElementById("results");
-            resultsDiv.textContent = `You scored ${score} out of 20.`;
-            
-            if (score >= 18) {
-                resultsDiv.style.backgroundColor = "#d4edda";
-                resultsDiv.style.color = "#155724";
-                resultsDiv.textContent += " Excellent job!";
-            } else if (score >= 14) {
-                resultsDiv.style.backgroundColor = "#fff3cd";
-                resultsDiv.style.color = "#856404";
-                resultsDiv.textContent += " Good, but you can do better!";
-            } else {
-                resultsDiv.style.backgroundColor = "#f8d7da";
-                resultsDiv.style.color = "#721c24";
-                resultsDiv.textContent += " Keep practicing these words!";
-            }
-            
-            // Show answer key
-            document.getElementById("answer-key").style.display = "block";
-            document.getElementById("key-content").innerHTML = keyContent;
+            feedback.style.display = 'none';
+            nextBtn.disabled = userAnswers[currentQuestion] === null;
         }
+
+        function selectOption(e) {
+            const selectedOption = e.currentTarget;
+            const selectedIndex = parseInt(selectedOption.dataset.index);
+            
+            // Remove selected class from all options
+            document.querySelectorAll('.option').forEach(opt => {
+                opt.classList.remove('selected');
+            });
+            
+            // Add selected class to clicked option
+            selectedOption.classList.add('selected');
+            
+            // Store user answer
+            userAnswers[currentQuestion] = selectedIndex;
+            
+            // Enable next button
+            nextBtn.disabled = false;
+            
+            // Show feedback immediately
+            showFeedback(selectedIndex);
+        }
+
+        function showFeedback(selectedIndex) {
+            const correctIndex = questions[currentQuestion].answer;
+            const isCorrect = selectedIndex === correctIndex;
+            
+            if (isCorrect) {
+                feedback.textContent = `正确！答案是 ${String.fromCharCode(65 + correctIndex)}. ${questions[currentQuestion].options[correctIndex]}`;
+                feedback.className = 'feedback correct-feedback';
+                if (userAnswers[currentQuestion] === selectedIndex && userAnswers[currentQuestion] !== null) {
+                    score++;
+                }
+            } else {
+                feedback.textContent = `错误。正确答案是 ${String.fromCharCode(65 + correctIndex)}. ${questions[currentQuestion].options[correctIndex]}`;
+                feedback.className = 'feedback incorrect-feedback';
+            }
+            
+            // Mark correct and incorrect answers
+            document.querySelectorAll('.option').forEach((opt, idx) => {
+                if (idx === correctIndex) {
+                    opt.classList.add('correct');
+                } else if (idx === selectedIndex) {
+                    opt.classList.add('incorrect');
+                }
+            });
+            
+            feedback.style.display = 'block';
+        }
+
+        function nextQuestion() {
+            currentQuestion++;
+            
+            if (currentQuestion < questions.length) {
+                displayQuestion();
+            } else {
+                showResult();
+            }
+        }
+
+        function showResult() {
+            document.querySelector('.quiz-container').style.display = 'none';
+            document.querySelector('.progress').style.display = 'none';
+            
+            const percentage = Math.round((score / questions.length) * 100);
+            result.textContent = `测验完成！你的得分: ${score}/${questions.length} (${percentage}%)`;
+            result.style.display = 'block';
+            
+            // Scroll to result
+            result.scrollIntoView({ behavior: 'smooth' });
+        }
+
+        nextBtn.addEventListener('click', nextQuestion);
+
+        // Initialize first question
+        displayQuestion();
     </script>
 </body>
 </html>
