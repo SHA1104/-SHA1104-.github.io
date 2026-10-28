@@ -1,0 +1,1 @@
+// 留空即可使用本地模式。不要在这里放 Supabase service_role / secret key。\nwindow.LATIN_APP_CONFIG={SUPABASE_URL:"https://dvsqjkmjkuhxtphqqibd.supabase.co",SUPABASE_ANON_KEY:"sb_publishable_2_n7ypwie6LeoD_6Ai2YYA_q67RL-0a",LATIN_CHECKER_URL:"",LATIN_CHECKER_KEY:""};
